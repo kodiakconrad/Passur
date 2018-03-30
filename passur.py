@@ -18,14 +18,16 @@ class Card:
 		self.suit = suit
 
 class Deck:
-	suit_list = [spades, clubs, hearts, diamonds]
+	suit_list = ['spades', 'clubs', 'hearts', 'diamonds']
 	deck = []
 	def __init__():
 		for suit in suit_list:
 			for n in range(1, 14):
 				card = Card(n, suit)
 				deck.add(card)
-		self.deck = random.permutation(deck)
+		self.deck = random.shuffle(deck)
 		self.cards_left = 52
-
-def playgame();
+	def remove(self):
+		cards_left -= 1
+		card = self.deck.remove()
+		return card
