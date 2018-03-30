@@ -55,7 +55,7 @@ def playgame():
   			state.p1points += points_gained
   			if (not board and card_played.number != 11 and state.deck.size > 0):
   				state.p1points += 5
-    		[board, points_gained, card_played] = player2.make_move(tate)
+    		[board, points_gained, card_played] = player2.make_move(state)
     		state.board = board
     		state.gone = state.gone.append(card_played)
     		state.p2points += points_gained
@@ -108,7 +108,7 @@ class Deck:
 		return true
 
 def showinstructions():
-	print("Oops, no instructions available yet")
+	print("No instructions available yet")
 
 if __name__ == '__main__':
     playgame()

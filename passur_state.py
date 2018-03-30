@@ -18,7 +18,7 @@ class Passur_State:
 	def __str__(self):
 		for x in board:
 			print(x)
-		print("There are " + str(cardsleft) + " cards left")
+		print("There are " + str(cards_left) + " cards left")
 
 	def __eq__(self, other):
 
