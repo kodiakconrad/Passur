@@ -18,7 +18,7 @@ class Passur_State:
 	def __str__(self):
 		for x in board:
 			print(x)
-		print("There are " + str(cards_left) + " cards left")
+		print("There are " + str(self.cardsleft) + " cards left")
 
 	def __eq__(self, other):
 
@@ -43,11 +43,5 @@ class Operator:
 
   def apply(self, s):
     return self.state_transf(s)
-
-OPERATORS = [Operator(
-	"Place "+str(card)+" on position "+str(pos),
-	lambda s, c1=card, p1=pos: s.can_move(card, pos),
-	lambda s, c1=card, p1=pos: s.move(card, pos) )
-	for (card, pos) in ALL_MOVES]
 
 GOAL_TEST = lambda s: goal_test(s)

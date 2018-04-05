@@ -9,6 +9,7 @@ import ast
 import priorityQB as pq
 import heapdictB as hd
 import random
+from passur_state import passur_state as passur
 
 class My_State():
 #My state keeps track of what cards I have in my hand
@@ -33,10 +34,20 @@ class My_State():
 
 	def copy(self):
 
-	def make_move(current_state):
+	def all_moves(self, current_state):
+		moves = []
+		for card in self.hand:
+			for place in current_state.board:	
+				moves.add(card,place)
+		return moves
 
-		OPERATORS = [Operator(
+	def make_move(current_state):
+		OPERATORS = [passur.Operator(
 		"Place "+str(card)+" on position "+str(pos),
 		lambda s, c1=card, p1=pos: s.can_move(card, pos),
 		lambda s, c1=card, p1=pos: s.move(card, pos) )
-		for (card, pos) in ALL_MOVES]
+		for (card, pos) in all_moves(current_state)]
+
+		# mext step is to writ can move and move functions in the state file
+		# the code above will not run the file as expected because it can not access those two methods
+		# we can deal with that problem later, but first we should have the methods written.
