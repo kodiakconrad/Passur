@@ -4,13 +4,16 @@ kconrad1@uw.edu
 Passur Game State
 '''
 
+def take_cards(hand):
 
 
 class Passur_State:
-	def __init__(self, deck, board, gone, cardsleft, p1points, p2points):
+	def __init__(self, deck, board, gone, p1hand, p2hand, cardsleft, p1points, p2points):
 		self.deck = deck 
 		self.board = board
 		self.gone = gone
+		self.p1hand = p1hand
+		self.p2hand = p2hand
 		self.p1points = p1points
 		self.p2points = p2points
 		self.cardsleft = cardsleft
@@ -25,10 +28,6 @@ class Passur_State:
 	def __hash__(self):
 
 	def copy(self):
-
-	def can_move(self, card, position):
-
-	def move(self, card, position):
 
 	def goal_test(s):
 

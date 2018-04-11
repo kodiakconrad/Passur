@@ -26,7 +26,7 @@ player1 =importlib.import_module(sys.argv[1])
 player2 =importlib.import_module(sys.argv[2])
 
 deck = Deck()
-INITIAL_STATE = passur_state(deck, [], [], 0, 0, deck.cards_left)
+INITIAL_STATE = passur_state(deck, [], [], [], [], 0, 0, deck.cards_left)
 
 def playgame():
 	current_state = INITIAL_STATE
@@ -38,24 +38,27 @@ def playgame():
 	answer = input("Y or N? >> ")
       if answer=="Y" or answer=="y": showinstrutions()
       for i in range 4:
-      	card = INITIAL_STATE.deck.remove()
+      	card = current_state.deck.remove()
       	current_state.board.append(card)
+      current_state.board.append(None)
     while current_state.cards_left > 0:
     	for i in range 4:
     		c1 = current_state.deck.remove()
     		p1hand.append(c1)
     		c2 = current_state.deck.remove()
     		p2hand.append(c2)
+    	current_state.p1hand = p1hand
+    	current_state.p2hand = p2hand
     	print(current_state)
     	while len(p2hand) > 0:
     		state = current_state.copy()
-    		[board, points_gained, card_played] = player1.make_move(state)
+    		[board, points_gained, card_played] = player1.make_move(state.board, state.p1hand)
   			state.board = board
   			state.gone = state.gone.append(card_played)
   			state.p1points += points_gained
   			if (not board and card_played.number != 11 and state.deck.size > 0):
   				state.p1points += 5
-    		[board, points_gained, card_played] = player2.make_move(state)
+    		[board, points_gained, card_played] = player2.make_move(state.board, state.p2hand)
     		state.board = board
     		state.gone = state.gone.append(card_played)
     		state.p2points += points_gained

@@ -9,15 +9,17 @@ import ast
 import priorityQB as pq
 import heapdictB as hd
 import random
-from passur_state import passur_state as passur
+import passur_state as passur
 
 class My_State():
 #My state keeps track of what cards I have in my hand
 '''After we get gameplay working, we can include state values for cards owned by both players.
    The game manager keeps track of points, and what to do with a card once it is played,
    it is our job to just make a decision and nothing else''' 
-	def __init__(hand):
+	def __init__(board, hand):
+		self.board = board
 		self.hand = hand
+		self.all_moves = [(card, place) for card in hand for place in board]
 
 	def __str__(self):
 		for x in hand:
@@ -34,20 +36,25 @@ class My_State():
 
 	def copy(self):
 
-	def all_moves(self, current_state):
-		moves = []
-		for card in self.hand:
-			for place in current_state.board:	
-				moves.add(card,place)
-		return moves
+	def can_move(self, card, position):
 
-	def make_move(current_state):
-		OPERATORS = [passur.Operator(
-		"Place "+str(card)+" on position "+str(pos),
-		lambda s, c1=card, p1=pos: s.can_move(card, pos),
-		lambda s, c1=card, p1=pos: s.move(card, pos) )
-		for (card, pos) in all_moves(current_state)]
+	def move(self, card, position):
 
-		# mext step is to writ can move and move functions in the state file
-		# the code above will not run the file as expected because it can not access those two methods
-		# we can deal with that problem later, but first we should have the methods written.
+
+def make_move(board, hand):
+	state = My_State(board, hand)
+
+	OPERATORS = [passur.Operator(
+	"Place "+str(card)+" on position "+str(pos),
+	lambda s, c1=card, p1=pos: s.can_move(card, pos),
+	lambda s, c1=card, p1=pos: s.move(card, pos) )
+	for (card, pos) in state.all_moves
+
+	# mext step is to write can move and move functions in the state file
+	# maybe only involve operators at manager level? not have as part of client? 
+	# we can deal with that problem later, but first we should have the methods written. 
+
+
+
+
+
